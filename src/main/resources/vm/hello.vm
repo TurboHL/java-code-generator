@@ -1,0 +1,4 @@
+<?xml version="1.0" enconding="utf-8" ?>
+<name>$!username<name>
+<age>$!user.age</age>
+data:${vmc.getName('1dddddd')}

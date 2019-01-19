@@ -1,0 +1,31 @@
+package ${model.packageName};
+#foreach($element in $model.importList)
+import $element;
+#end
+
+/**
+*
+* @author hl.Yang
+* @create ${model.creatDate}
+* @desc ${model.classDesc}
+**/
+public class ${model.className}{
+
+#foreach($element in $model.modelFieldList)
+    //$element.fieldDesc;
+    private $element.fieldType $element.fieldName;
+#end
+
+#set($k="()")
+#set($k1="(")
+#set($k2=")")
+#foreach($element in $model.modelFieldList)
+    public $element.fieldType get$element.fieldNameUpcase$k {
+        return $element.fieldName;
+    }
+    public void set$element.fieldNameUpcase$k1$element.fieldType $element.fieldName$k2 {
+        this.$element.fieldName = $element.fieldName;
+    }
+#end
+
+}

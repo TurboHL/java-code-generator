@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.turbo.codegenerator.mapper.InformationSchemaMapper" >
+
+<!--
+    <resultMap id="BaseResultMap" type="com.turbo.sbootlearn.model.UserMain" >
+        <id column="user_id" property="userId" jdbcType="INTEGER" />
+        <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+        <result column="email" property="email" jdbcType="VARCHAR" />
+     </resultMap>
+
+    <insert id="insertUserMain" parameterType="com.turbo.sbootlearn.model.UserMain"  useGeneratedKeys="true" keyProperty="userId"  keyColumn="user_id">
+        insert into user_main (mobile, email)
+        values (#{mobile,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR})
+    </insert>
+
+    <select id="queryUserMainList" parameterType="com.turbo.sbootlearn.model.UserMain" resultMap="BaseResultMap" >
+          select * from user_main
+    </select>-->
+
+
+    <select id="querySchemataList" resultType="com.turbo.codegenerator.model.Schemata">
+      select * from information_schema.SCHEMATA;
+    </select>
+
+    <select id="querySchemaTableList" resultType="com.turbo.codegenerator.model.SchemaTable" parameterType="java.util.Map">
+        select * from information_schema.TABLES t where t.`TABLE_SCHEMA` = #{tableSchema} and t.TABLE_NAME = #{tableName}
+    </select>
+
+    <select id="queryTableColumnList" resultType="com.turbo.codegenerator.model.TableColumn" parameterType="java.util.Map">
+      select * from `information_schema`.`COLUMNS` t where t.`TABLE_SCHEMA`=#{tableSchema } and t.`TABLE_NAME` = #{tableName };
+    </select>
+
+</mapper>

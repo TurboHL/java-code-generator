@@ -1,0 +1,49 @@
+package ${model.packageName};
+#foreach($element in $model.importList)
+import $element;
+#end
+
+/**
+*
+* @author hl.Yang
+* @create ${model.creatDate}
+* @desc ${model.classDesc}
+**/
+public interface ${model.className}{
+
+    /**
+    * 插入数据
+    * @param entity
+    * @return
+    */
+    int insert(${model.modelName} entity);
+
+    /**
+    * 更新
+    * @param entity
+    * @return
+    */
+    int update(${model.modelName} entity);
+
+    /**
+    * 通过主键更新
+    * @param entity
+    * @return
+    */
+    int updateByPrimaryKey(${model.modelName} entity);
+
+    /**
+    * 获取列表
+    * @param entity
+    * @return
+    */
+    List<${model.modelName}> selectByExample(${model.modelName} entity);
+
+    /**
+    * 通过主键获取对象
+    * @param id
+    * @return
+    */
+    ${model.modelName} selectByPrimaryKey(Long id);
+
+ }

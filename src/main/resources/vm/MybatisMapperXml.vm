@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="$model.mapperDirPath" >
+
+    <insert id="insert" parameterType="$model.modelDirPath"  useGeneratedKeys="true" keyProperty="$model.modelPrimaryKey">
+        insert into $model.tableName
+        (
+            #foreach($element in $model.modelFieldList) ${element.tableFieldName}#if($!{velocityCount} != $!{model.modelFieldList.size()}),#end #end
+        )values (
+            #foreach($element in $model.modelFieldList) #{$element.fieldName}#if($!{velocityCount} != $!{model.modelFieldList.size()}),#end #end
+        )
+    </insert>
+
+    <update id="updateByPrimaryKey" parameterType="$model.modelDirPath">
+        update $model.tableName
+        <set>
+    #foreach($element in $model.modelFieldList)
+        <if test="$element.fieldName != null">${element.tableFieldName} = #{$element.fieldName,jdbcType=$element.fieldType}#if($!{velocityCount} != $!{model.modelFieldList.size()}),#end</if>
+    #end
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="selectByPrimaryKey" parameterType="$model.modelPrimaryKeyType" resultMap="BaseResultMap">
+        select * from $model.tableName
+        <where>
+            $model.tablePrimaryKey = #{$model.modelPrimaryKey,jdbcType=$model.tablePrimaryKeyType}
+        </where>
+    </select>
+
+    <select id="selectByExample" parameterType="$model.modelDirPath" resultMap="BaseResultMap">
+        select * from $model.tableName
+        <where>
+            <include refid="Base_Column_List"/>
+        </where>
+    </select>
+
+    <resultMap id="BaseResultMap" type="$model.modelDirPath" >
+    <id column="$model.tablePrimaryKey" property="$model.modelPrimaryKey" jdbcType="BIGINT" />
+    #foreach($element in $model.modelFieldList)
+    #if($model.tablePrimaryKey != $element.tableFieldName)<result column="${element.tableFieldName}" property="${element.fieldName}" jdbcType="${element.fieldType}"/>
+    #end
+    #end
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    #foreach($element in $model.modelFieldList)
+    <if test="$element.fieldName != null">#if($!{velocityCount} != 1)and#end ${element.tableFieldName} = #{$element.fieldName,jdbcType=$element.fieldType}</if>
+    #end##
+    </sql>
+</mapper>
