@@ -45,7 +45,7 @@ public class CodeGeneratorApplicationTests {
 		String basePackage = "src/main/java/";
 
 		//自定义路径
-		String aa = "/Users/yanghl/workspace_code/code-generator/src/main/java/";
+		String aa = "/Users/yanghl/workspace_code/java-code-generator/src/main/java/";
 
 		dto.setOutputPath(aa);
 		dto.setPackageDir(systemProperties.getPackageDirPath());

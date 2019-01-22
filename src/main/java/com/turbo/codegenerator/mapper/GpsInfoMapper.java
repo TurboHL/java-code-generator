@@ -5,7 +5,7 @@ import com.turbo.codegenerator.model.GpsInfo;
 /**
 *
 * @author hl.Yang
-* @create 2019-1-19 15:23:10
+* @create 2019-1-21 9:51:35
 * @desc GPS信息表（根据经纬度获取）
 **/
 public interface GpsInfoMapper{
